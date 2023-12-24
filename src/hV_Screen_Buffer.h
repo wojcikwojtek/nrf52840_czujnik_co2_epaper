@@ -1,3 +1,4 @@
+#pragma once
 ///
 /// @file hV_Screen_Buffer.h
 /// @brief Generic buffered screen class library
@@ -40,8 +41,6 @@
 // Common utilities
 #include "hV_Utilities_Common.h"
 
-
-
 #if (FONT_MODE == USE_FONT_TERMINAL)
 #include "hV_Font_Terminal.h"
 
@@ -75,7 +74,7 @@ class hV_Screen_Buffer : protected hV_Font_Terminal
     /// @brief Request information about the screen
     /// @return string with hardware version
     ///
-    virtual std::string WhoAmI() = 0; // compulsory
+    virtual char* WhoAmI() = 0; // compulsory
 
     ///
     /// @brief Clear the screen
@@ -308,7 +307,7 @@ class hV_Screen_Buffer : protected hV_Font_Terminal
     /// @return horizontal size of the string for current font, in pixels
     /// @n @b More: @ref Fonts
     ///
-    virtual uint16_t stringSizeX(std::string text);
+    virtual uint16_t stringSizeX(char* text);
 
     ///
     /// @brief Number of characters to fit a size, x-axis
@@ -317,7 +316,7 @@ class hV_Screen_Buffer : protected hV_Font_Terminal
     /// @return number of characters to be displayed inside the pixels
     /// @n @b More: @ref Fonts
     ///
-    virtual uint8_t stringLengthToFitX(std::string text, uint16_t pixels);
+    virtual uint8_t stringLengthToFitX(char* text, uint16_t pixels);
 
     ///
     /// @brief Number of fonts
@@ -339,7 +338,7 @@ class hV_Screen_Buffer : protected hV_Font_Terminal
     /// @n @b More: @ref Colour, @ref Fonts, @ref Coordinate
     ///
     virtual void gText(uint16_t x0, uint16_t y0,
-                       std::string text,
+                       char* text,
                        uint16_t textColour = myColours.black,
                        uint16_t backColour = myColours.white);
     /// @}

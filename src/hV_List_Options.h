@@ -1,3 +1,4 @@
+#pragma once
 ///
 /// @file hV_List_Options.h
 /// @brief List of options for Pervasive Displays Library Suite

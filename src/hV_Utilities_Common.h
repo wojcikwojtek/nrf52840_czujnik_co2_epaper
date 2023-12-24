@@ -1,3 +1,4 @@
+#pragma once
 ///
 /// @file hV_Utilities_Common.h
 /// @brief Utilities for highView Library Suite
@@ -24,15 +25,13 @@
 
 // SDK
 #include "hV_HAL_Peripherals.h"
+#include "hV_List_Boards.h"
 
 #ifndef hV_UTILITIES_RELEASE
 ///
 /// @brief Library release number
 ///
 #define hV_UTILITIES_RELEASE 702
-
-#include <string>
-#include <math.h>
 
 #ifndef min
 #define min(a, b) ((a) < (b) ? (a) : (b))
@@ -112,7 +111,7 @@ void convertRectangle2Polar(uint16_t centerX, uint16_t centerY, uint16_t rectang
 /// (Mountain View, CA: The Unicode Consortium, 2012. ISBN 978-1-936213-07-8)
 /// http://www.unicode.org/versions/Unicode6.2.0/
 ///
-std::string utf2iso(std::string s);
+const char* utf2iso(const char* s);
 
 ///
 /// @brief Format string
@@ -122,7 +121,7 @@ std::string utf2iso(std::string s);
 /// @return string with values formatted
 /// @see http://www.cplusplus.com/reference/cstdio/printf/?kw=printf for codes
 ///
-std::string formatString(const char * format, ...);
+char* formatString(const char * format, ...);
 
 ///
 /// @brief Remove leading and ending characters
@@ -130,7 +129,7 @@ std::string formatString(const char * format, ...);
 /// @return trimmed text
 /// @note Removed characters are LF CR TAB SPACE '
 ///
-std::string trimString(std::string text);
+const char* trimString(const char* text);
 
 /// @}
 

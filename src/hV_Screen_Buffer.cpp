@@ -22,20 +22,8 @@
 // Library header
 #include "hV_Screen_Buffer.h"
 //#include "QuickDebug.h"
-#include <string>
-using namespace std;
 
 // Code
-
-bool bitRead(const uint8_t &value, int bitIndex) {
-    if (bitIndex >= 0 && bitIndex < sizeof(value) * 8) {
-        return (value & (1 << bitIndex)) != 0;
-    } else {
-        //std::cerr << "Invalid bit index." << std::endl;
-        return false;
-    }
-}
-
 hV_Screen_Buffer::hV_Screen_Buffer()
 {
     f_fontSize = 0;
@@ -259,7 +247,7 @@ void hV_Screen_Buffer::line(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2, 
         int16_t wy1 = (int16_t)y1;
         int16_t wy2 = (int16_t)y2;
 
-        bool flag = abs(wy2 - wy1) > abs(wx2 - wx1);
+        bool flag = arduino_func.abs(wy2 - wy1) > arduino_func.abs(wx2 - wx1);
         if (flag)
         {
             swap(wx1, wy1);
@@ -273,7 +261,7 @@ void hV_Screen_Buffer::line(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2, 
         }
 
         int16_t dx = wx2 - wx1;
-        int16_t dy = abs(wy2 - wy1);
+        int16_t dy = arduino_func.abs(wy2 - wy1);
         int16_t err = dx / 2;
         int16_t ystep;
 
@@ -367,11 +355,11 @@ void hV_Screen_Buffer::_triangleArea(uint16_t x1, uint16_t y1, uint16_t x2, uint
     bool changed1 = false;
     bool changed2 = false;
 
-    int16_t dx1 = abs(wx2 - wx1);
-    int16_t dy1 = abs(wy2 - wy1);
+    int16_t dx1 = arduino_func.abs(wx2 - wx1);
+    int16_t dy1 = arduino_func.abs(wy2 - wy1);
 
-    int16_t dx2 = abs(wx3 - wx1);
-    int16_t dy2 = abs(wy3 - wy1);
+    int16_t dx2 = arduino_func.abs(wx3 - wx1);
+    int16_t dy2 = arduino_func.abs(wy3 - wy1);
 
     int16_t signx1 = (wx2 >= wx1) ? +1 : -1;
     int16_t signx2 = (wx3 >= wx1) ? +1 : -1;
@@ -507,17 +495,17 @@ void hV_Screen_Buffer::triangle(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t 
             k_msleep(1);
 #else
             //delayMicroseconds(1000); // delay(1);
-            k_msleep(1);
+            k_usleep(1000);
 #endif // ESP8266
             //delayMicroseconds(1000); // delay(1);
-            k_msleep(1);
+            k_usleep(1000);
             _triangleArea(x3, y3, x2, y2, x4, y4, colour);
 #if defined(ESP8266)
             //delay(1);
             k_msleep(1);
 #else
             //delayMicroseconds(1000); // delay(1);
-            k_msleep(1);
+            k_usleep(1000);
 #endif // ESP8266
         }
     }
@@ -575,12 +563,12 @@ uint16_t hV_Screen_Buffer::characterSizeY()
     return f_characterSizeY();
 }
 
-uint16_t hV_Screen_Buffer::stringSizeX(string text)
+uint16_t hV_Screen_Buffer::stringSizeX(char* text)
 {
     return f_stringSizeX(text);
 }
 
-uint8_t hV_Screen_Buffer::stringLengthToFitX(string text, uint16_t pixels)
+uint8_t hV_Screen_Buffer::stringLengthToFitX(char* text, uint16_t pixels)
 {
     return f_stringLengthToFitX(text, pixels);
 }
@@ -601,7 +589,7 @@ uint8_t hV_Screen_Buffer::_getCharacter(uint8_t character, uint8_t index)
 }
 
 void hV_Screen_Buffer::gText(uint16_t x0, uint16_t y0,
-                             string text,
+                             char* text,
                              uint16_t textColour,
                              uint16_t backColour)
 #if (FONT_MODE == USE_FONT_TERMINAL)
@@ -613,7 +601,7 @@ void hV_Screen_Buffer::gText(uint16_t x0, uint16_t y0,
 #if (MAX_FONT_SIZE > 0)
     if (f_fontSize == 0)
     {
-        for (k = 0; k < text.length(); k++)
+        for (k = 0; k < strlen(text); k++)
         {
             c = text[k] - ' ';
 
@@ -622,7 +610,7 @@ void hV_Screen_Buffer::gText(uint16_t x0, uint16_t y0,
                 line = f_getCharacter(c, i);
 
                 for (j = 0; j < 8; j++)
-                    if (bitRead(line, j))
+                    if (arduino_func.bitRead(line, j))
                     {
                         point(x0 + 6 * k + i, y0 + j, textColour);
                     }
@@ -636,7 +624,7 @@ void hV_Screen_Buffer::gText(uint16_t x0, uint16_t y0,
 #if (MAX_FONT_SIZE > 1)
     else if (f_fontSize == 1)
     {
-        for (k = 0; k < text.length(); k++)
+        for (k = 0; k < strlen(text); k++)
         {
             c = text[k] - ' ';
 
@@ -647,7 +635,7 @@ void hV_Screen_Buffer::gText(uint16_t x0, uint16_t y0,
 
                 for (j = 0; j < 8; j++)
                 {
-                    if (bitRead(line, j))
+                    if (arduino_func.bitRead(line, j))
                     {
                         point(x0 + 8 * k + i, y0 + j, textColour);
                     }
@@ -655,7 +643,7 @@ void hV_Screen_Buffer::gText(uint16_t x0, uint16_t y0,
                     {
                         point(x0 + 8 * k + i, y0 + j, backColour);
                     }
-                    if (bitRead(line1, j))
+                    if (arduino_func.bitRead(line1, j))
                     {
                         point(x0 + 8 * k + i, y0 + 8 + j, textColour);
                     }
@@ -671,7 +659,7 @@ void hV_Screen_Buffer::gText(uint16_t x0, uint16_t y0,
     else if (f_fontSize == 2)
     {
 
-        for (k = 0; k < text.length(); k++)
+        for (k = 0; k < strlen(text); k++)
         {
             c = text[k] - ' ';
 
@@ -682,7 +670,7 @@ void hV_Screen_Buffer::gText(uint16_t x0, uint16_t y0,
 
                 for (j = 0; j < 8; j++)
                 {
-                    if (bitRead(line, j))
+                    if (arduino_func.bitRead(line, j))
                     {
                         point(x0 + 12 * k + i, y0 + j,    textColour);
                     }
@@ -690,7 +678,7 @@ void hV_Screen_Buffer::gText(uint16_t x0, uint16_t y0,
                     {
                         point(x0 + 12 * k + i, y0 + j,    backColour);
                     }
-                    if (bitRead(line1, j))
+                    if (arduino_func.bitRead(line1, j))
                     {
                         point(x0 + 12 * k + i, y0 + 8 + j, textColour);
                     }
@@ -705,7 +693,7 @@ void hV_Screen_Buffer::gText(uint16_t x0, uint16_t y0,
 #if (MAX_FONT_SIZE > 3)
     else if (f_fontSize == 3)
     {
-        for (k = 0; k < text.length(); k++)
+        for (k = 0; k < strlen(text); k++)
         {
             c = text[k] - ' ';
             for (i = 0; i < 16; i++)
@@ -715,7 +703,7 @@ void hV_Screen_Buffer::gText(uint16_t x0, uint16_t y0,
                 line2 = f_getCharacter(c, 3 * i + 2);
                 for (j = 0; j < 8; j++)
                 {
-                    if (bitRead(line, j))
+                    if (arduino_func.bitRead(line, j))
                     {
                         point(x0 + 16 * k + i, y0 + j,     textColour);
                     }
@@ -723,7 +711,7 @@ void hV_Screen_Buffer::gText(uint16_t x0, uint16_t y0,
                     {
                         point(x0 + 16 * k + i, y0 + j,     backColour);
                     }
-                    if (bitRead(line1, j))
+                    if (arduino_func.bitRead(line1, j))
                     {
                         point(x0 + 16 * k + i, y0 + 8 + j,  textColour);
                     }
@@ -731,7 +719,7 @@ void hV_Screen_Buffer::gText(uint16_t x0, uint16_t y0,
                     {
                         point(x0 + 16 * k + i, y0 + 8 + j,  backColour);
                     }
-                    if (bitRead(line2, j))
+                    if (arduino_func.bitRead(line2, j))
                     {
                         point(x0 + 16 * k + i, y0 + 16 + j, textColour);
                     }

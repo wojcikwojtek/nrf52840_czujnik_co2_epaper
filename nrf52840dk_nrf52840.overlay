@@ -10,3 +10,39 @@
 
 // For more help, browse the DeviceTree documentation at https://docs.zephyrproject.org/latest/guides/dts/index.html
 // You can also visit the nRF DeviceTree extension documentation at https://nrfconnect.github.io/vscode-nrf-connect/devicetree/nrfdevicetree.html
+/ {
+    aliases {
+        respin = "/epd_out/res";
+        cspin = "/epd_out/cs";
+        dcpin = "/epd_out/dc";
+        busypin = "/epd_in/busy";
+    };
+    epd_out {
+        compatible = "gpio-leds";
+        res {
+            gpios = <&gpio1 5 GPIO_ACTIVE_HIGH>;
+            label = "EDP_RES";
+        };
+        cs {
+            gpios = <&gpio1 4 GPIO_ACTIVE_HIGH>;
+            label = "EDP_CS";
+        };
+        dc {
+            gpios = <&gpio1 3 GPIO_ACTIVE_HIGH>;
+            label = "EDP_DC";
+        };
+    };
+
+    epd_in {
+        compatible = "gpio-keys";
+        busy {
+            gpios = <&gpio1 2 GPIO_ACTIVE_HIGH>;
+            label = "EDP_BUSY";
+        };
+    };
+};
+&spi1_sleep {
+    group1 {
+        psels = <NRF_PSEL(SPIM_MISO, 1, 8)>;
+    };
+};

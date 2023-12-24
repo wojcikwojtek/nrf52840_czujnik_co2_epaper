@@ -1,3 +1,4 @@
+#pragma once
 ///
 /// @file hV_Utilities_PDLS.h
 /// @brief Driver for Pervasive Displays EXT3, EXT3-1 and EXT3-Touch boards
@@ -48,8 +49,6 @@
 /// @brief Library release number
 ///
 #define hV_UTILITIES_PDLS_RELEASE 700
-
-
 
 // Objects
 //

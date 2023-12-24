@@ -1,11 +1,7 @@
 cmake_minimum_required(VERSION 3.20.0)
 find_package(Zephyr REQUIRED HINTS $ENV{ZEPHYR_BASE})
 
-project(module_tests)
-
-target_include_directories(app PRIVATE
-    src
-)
+project(nrf52840_czujnik_co2_epaper)
 
 target_sources(app PRIVATE 
     src/main.cpp
@@ -17,4 +13,5 @@ target_sources(app PRIVATE
     src/hV_Utilities_Common.cpp
     src/hV_Utilities_PDLS.cpp
     src/Screen_EPD_EXT3.cpp
+    src/Arduino_Own.cpp
 )

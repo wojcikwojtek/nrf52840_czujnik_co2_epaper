@@ -28,8 +28,6 @@
 
 // Library header
 #include "Screen_EPD_EXT3.h"
-#include <string>
-using namespace std;
 
 #if defined(ENERGIA)
 ///
@@ -66,25 +64,13 @@ using namespace std;
 // === End of COG section
 //
 
-void bitClear(uint8_t &value, int bitIndex) {
-    if (bitIndex >= 0 && bitIndex < sizeof(value) * 8) {
-        value &= ~(1 << bitIndex);
-    } 
-}
-
-void bitSet(uint8_t &value, int bitIndex) {
-    if (bitIndex >= 0 && bitIndex < sizeof(value) * 8) {
-        value |= (1 << bitIndex);
-    }
-}
-
 //
 // === Class section
 //
-Screen_EPD_EXT3::Screen_EPD_EXT3(eScreen_EPD_EXT3_t eScreen_EPD_EXT3, pins_t board)
+Screen_EPD_EXT3::Screen_EPD_EXT3(eScreen_EPD_EXT3_t eScreen_EPD_EXT3)
 {
     u_eScreen_EPD_EXT3 = eScreen_EPD_EXT3;
-    b_pin = board;
+    //b_pin = board;
     u_newImage = 0; // nullptr
 }
 
@@ -269,53 +255,76 @@ void Screen_EPD_EXT3::begin()
 
     // Initialise the /CS pins
     //pinMode(b_pin.panelCS, OUTPUT);
-    gpio_pin_configure(gpio_dev, b_pin.panelCS, GPIO_OUTPUT);
     //digitalWrite(b_pin.panelCS, HIGH); // CS# = 1
-    gpio_pin_set(gpio_dev, b_pin.panelCS, 1);
-
+    if(!device_is_ready(edp_cs_pin.port)) {
+        printk("GPIO port initialization error\n");
+        return;
+    }
+    int ret;
+    ret = gpio_pin_configure_dt(&edp_cs_pin, GPIO_OUTPUT_ACTIVE);
+    if (ret != 0) {
+        return;
+    }
+    ret = gpio_pin_set_dt(&edp_cs_pin, 1);
+    if (ret != 0) {
+        printk("Failed to set pin\n");
+    }
     // New generic solution
     //pinMode(b_pin.panelDC, OUTPUT);
-    gpio_pin_configure(gpio_dev, b_pin.panelDC, GPIO_OUTPUT);
     //pinMode(b_pin.panelReset, OUTPUT);
-    gpio_pin_configure(gpio_dev, b_pin.panelReset, GPIO_OUTPUT);
     //pinMode(b_pin.panelBusy, INPUT); // All Pins 0
-    gpio_pin_configure(gpio_dev, b_pin.panelBusy, GPIO_INPUT);
+    
+    ret = gpio_pin_configure_dt(&edp_dc_pin, GPIO_OUTPUT_ACTIVE);
+    if (ret != 0) {
+        return;
+    }
+    ret = gpio_pin_configure_dt(&edp_res_pin, GPIO_OUTPUT_ACTIVE);
+    if (ret != 0) {
+        return;
+    }
+    ret = gpio_pin_configure_dt(&edp_busy_pin, GPIO_INPUT);
+    if (ret != 0) {
+        return;
+    }
+
+    printk("GPIO pins initialized correctly\n");
+    //ret = gpio_pin_set_dt(&edp_dc_pin, 1);
+    //if (ret != 0) {
+        //printk("Failed to set pin\n");
+    //}
+    //ret = gpio_pin_set_dt(&edp_res_pin, 1);
+    //if (ret != 0) {
+        //printk("Failed to set pin\n");
+    //}
+    
 
     // Initialise Flash /CS as HIGH
-    if (b_pin.flashCS != NOT_CONNECTED)
-    {
+    //if (b_pin.flashCS != NOT_CONNECTED)
+    //{
         //pinMode(b_pin.flashCS, OUTPUT);
-        gpio_pin_configure(gpio_dev, b_pin.flashCS, GPIO_OUTPUT);
         //digitalWrite(b_pin.flashCS, HIGH);
-        gpio_pin_set(gpio_dev, b_pin.flashCS, 1);
-    }
+    //}
 
     // Initialise slave panel /CS as HIGH
-    if (b_pin.panelCSS != NOT_CONNECTED)
-    {
+    //if (b_pin.panelCSS != NOT_CONNECTED)
+    //{
         //pinMode(b_pin.panelCSS, OUTPUT);
-        gpio_pin_configure(gpio_dev, b_pin.panelCSS, GPIO_OUTPUT);
         //digitalWrite(b_pin.panelCSS, HIGH);
-        gpio_pin_set(gpio_dev, b_pin.panelCSS, 1);
-    }
+    //}
 
     // Initialise slave Flash /CS as HIGH
-    if (b_pin.flashCSS != NOT_CONNECTED)
-    {
+    //if (b_pin.flashCSS != NOT_CONNECTED)
+    //{
         //pinMode(b_pin.flashCSS, OUTPUT);
-        gpio_pin_configure(gpio_dev, b_pin.flashCSS, GPIO_OUTPUT);
         //digitalWrite(b_pin.flashCSS, HIGH);
-        gpio_pin_set(gpio_dev, b_pin.flashCSS, 1);
-    }
+    //}
 
     // Initialise SD-card /CS as HIGH
-    if (b_pin.cardCS != NOT_CONNECTED)
-    {
+    //if (b_pin.cardCS != NOT_CONNECTED)
+    //{
         //pinMode(b_pin.cardCS, OUTPUT);
-        gpio_pin_configure(gpio_dev, b_pin.cardCS, GPIO_OUTPUT);
         //digitalWrite(b_pin.cardCS, HIGH);
-        gpio_pin_set(gpio_dev, b_pin.cardCS, 1);
-    }
+    //}
 
     // Initialise SPI
     //_settingScreen = {4000000, MSBFIRST, SPI_MODE0};
@@ -391,14 +400,14 @@ void Screen_EPD_EXT3::begin()
 
     // Report
     //Serial.println(formatString("= Screen %s %ix%i", WhoAmI().c_str(), screenSizeX(), screenSizeY()));
-    printk("= Screen %s %ix%i", WhoAmI().c_str(), screenSizeX(), screenSizeY());
+    printk("= Screen %s %ix%i", WhoAmI(), screenSizeX(), screenSizeY());
     //Serial.println(formatString("= PDLS %s v%i.%i.%i", SCREEN_EPD_EXT3_VARIANT, SCREEN_EPD_EXT3_RELEASE / 100, (SCREEN_EPD_EXT3_RELEASE / 10) % 10, SCREEN_EPD_EXT3_RELEASE % 10));
     printk("= PDLS %s v%i.%i.%i", SCREEN_EPD_EXT3_VARIANT, SCREEN_EPD_EXT3_RELEASE / 100, (SCREEN_EPD_EXT3_RELEASE / 10) % 10, SCREEN_EPD_EXT3_RELEASE % 10);
 
     clear();
 }
 
-string Screen_EPD_EXT3::WhoAmI()
+char* Screen_EPD_EXT3::WhoAmI()
 {
     char work[64] = {0};
     u_WhoAmI(work);
@@ -633,7 +642,7 @@ void Screen_EPD_EXT3::_flushGlobal()
 
         // Display Refresh Start
         //while (digitalRead(b_pin.panelBusy) != HIGH)
-        while(gpio_pin_get(gpio_dev, b_pin.panelBusy) != 1)
+        while(isEPD_BUSY != 1)
         {
             //delay(100);
             k_msleep(100);
@@ -645,7 +654,7 @@ void Screen_EPD_EXT3::_flushGlobal()
 
         // DC-DC off
         //while (digitalRead(b_pin.panelBusy) != HIGH)
-        while(gpio_pin_get(gpio_dev, b_pin.panelBusy) != 1)
+        while(isEPD_BUSY != 1)
         {
             //delay(100);
             k_msleep(100);
@@ -659,17 +668,17 @@ void Screen_EPD_EXT3::_flushGlobal()
         k_msleep(200);
 
         //while (digitalRead(b_pin.panelBusy) != HIGH)
-        while(gpio_pin_get(gpio_dev, b_pin.panelBusy) != 1)
+        while(isEPD_BUSY != 1)
         {
             //delay(100);
             k_msleep(100);
         }
         //digitalWrite(b_pin.panelDC, LOW);
-        gpio_pin_set(gpio_dev, b_pin.panelDC, 0);
+        EPD_DC_0;
         //digitalWrite(b_pin.panelCS, LOW);
-        gpio_pin_set(gpio_dev, b_pin.panelCS, 0);
+        EPD_CS_0;
         //digitalWrite(b_pin.panelReset, LOW);
-        gpio_pin_set(gpio_dev, b_pin.panelReset, 0);
+        EPD_RST_0;
         // digitalWrite(PNLON_PIN, LOW); // PANEL_OFF# = 0
     }
     else if ((u_codeSize == 0x96) or (u_codeSize == 0xB9))
@@ -848,7 +857,7 @@ void Screen_EPD_EXT3::_flushGlobal()
 
         // Display Refresh Start
         //while (digitalRead(b_pin.panelBusy) != HIGH)
-        while(gpio_pin_get(gpio_dev, b_pin.panelBusy) != 1)
+        while(isEPD_BUSY != 1)
         {
             //delay(100);
             k_msleep(100);
@@ -860,7 +869,7 @@ void Screen_EPD_EXT3::_flushGlobal()
 
         // DC/DC off
         //while (digitalRead(b_pin.panelBusy) != HIGH)
-        while(gpio_pin_get(gpio_dev, b_pin.panelBusy) != 1)
+        while(isEPD_BUSY != 1)
         {
             //delay(100);
             k_msleep(100);
@@ -873,31 +882,29 @@ void Screen_EPD_EXT3::_flushGlobal()
         //delay_ms(200);
         k_msleep(200);
         //while (digitalRead(b_pin.panelBusy) != HIGH)
-        while(gpio_pin_get(gpio_dev, b_pin.panelBusy) != 1)
+        while(isEPD_BUSY != 1)
         {
             //delay(100);
             k_msleep(100);
         }
         //digitalWrite(b_pin.panelDC, LOW);
-        gpio_pin_set(gpio_dev, b_pin.panelDC, 0);
+        EPD_DC_0;
         //digitalWrite(b_pin.panelCS, LOW);
-        gpio_pin_set(gpio_dev, b_pin.panelCS, 0);
+        EPD_CS_0;
 
-        if (b_pin.panelCSS != NOT_CONNECTED)
-        {
+        //if (b_pin.panelCSS != NOT_CONNECTED)
+        //{
             //digitalWrite(b_pin.panelCSS, LOW);
-            gpio_pin_set(gpio_dev, b_pin.panelCSS, 0);
-        }
+        //}
 
         //digitalWrite(b_pin.panelReset, LOW);
-        gpio_pin_set(gpio_dev, b_pin.panelReset, 0);
+        EPD_RST_0;
         // digitalWrite(PNLON_PIN, LOW); // PANEL_OFF# = 0
 
-        if (b_pin.panelCSS != NOT_CONNECTED)
-        {
+        //if (b_pin.panelCSS != NOT_CONNECTED)
+        //{
             //digitalWrite(b_pin.panelCSS, HIGH); // CSS# = 1
-            gpio_pin_set(gpio_dev, b_pin.panelCSS, 1);
-        }
+        //}
     }
     else // small, including 420 and 437
     {
@@ -943,19 +950,19 @@ void Screen_EPD_EXT3::_flushGlobal()
         //delay_ms(5);
         k_msleep(5);
         //while (digitalRead(b_pin.panelBusy) != HIGH)
-        while(gpio_pin_get(gpio_dev, b_pin.panelBusy) != 1)
+        while(isEPD_BUSY != 1)
         {
             //delay(100);
             k_msleep(100);
         };
 
         //while (digitalRead(b_pin.panelBusy) != HIGH);
-        while(gpio_pin_get(gpio_dev, b_pin.panelBusy) != 1);
+        while(isEPD_BUSY != 1);
         b_sendIndexData(0x12, data8, 1); // Display Refresh
         //delay_ms(5);
         k_msleep(5);
         //while (digitalRead(b_pin.panelBusy) != HIGH)
-        while(gpio_pin_get(gpio_dev, b_pin.panelBusy) != 1)
+        while(isEPD_BUSY != 1)
         {
             //delay(100);
             k_msleep(100);
@@ -965,22 +972,22 @@ void Screen_EPD_EXT3::_flushGlobal()
         //delay_ms(5);
         k_msleep(5);
         //while (digitalRead(b_pin.panelBusy) != HIGH)
-        while(gpio_pin_get(gpio_dev, b_pin.panelBusy) != 1)
+        while(isEPD_BUSY != 1)
         {
             //delay(100);
             k_msleep(100);
         };
         //digitalWrite(b_pin.panelDC, LOW);
-        gpio_pin_set(gpio_dev, b_pin.panelDC, 0);
+        EPD_DC_0;
         //digitalWrite(b_pin.panelCS, LOW);
-        gpio_pin_set(gpio_dev, b_pin.panelCS, 0);
+        EPD_CS_0;
 
         //digitalWrite(b_pin.panelReset, LOW);
-        gpio_pin_set(gpio_dev, b_pin.panelReset, 0);
+        EPD_RST_0;
         // digitalWrite(PNLON_PIN, LOW);
     }
     //digitalWrite(b_pin.panelCS, HIGH); // CS# = 1
-    gpio_pin_set(gpio_dev, b_pin.panelCS, 1);
+    EPD_CS_1;
 }
 
 void Screen_EPD_EXT3::clear(uint16_t colour)
@@ -1099,20 +1106,20 @@ void Screen_EPD_EXT3::_setPoint(uint16_t x1, uint16_t y1, uint16_t colour)
     if (colour == myColours.red)
     {
         // physical red 01
-        bitClear(u_newImage[z1], b1);
-        bitSet(u_newImage[u_pageColourSize + z1], b1);
+        arduino_func.bitClear(u_newImage[z1], b1);
+        arduino_func.bitSet(u_newImage[u_pageColourSize + z1], b1);
     }
     else if ((colour == myColours.white) xor u_invert)
     {
         // physical black 00
-        bitClear(u_newImage[z1], b1);
-        bitClear(u_newImage[u_pageColourSize + z1], b1);
+        arduino_func.bitClear(u_newImage[z1], b1);
+        arduino_func.bitClear(u_newImage[u_pageColourSize + z1], b1);
     }
     else if ((colour == myColours.black) xor u_invert)
     {
         // physical white 10
-        bitSet(u_newImage[z1], b1);
-        bitClear(u_newImage[u_pageColourSize + z1], b1);
+        arduino_func.bitSet(u_newImage[z1], b1);
+        arduino_func.bitClear(u_newImage[u_pageColourSize + z1], b1);
     }
 }
 

@@ -1,3 +1,4 @@
+#pragma once
 ///
 /// @file hV_List_Constants.h
 /// @brief List of constants for Pervasive Displays Library Suite
@@ -30,7 +31,6 @@
 /// @brief Release
 ///
 #define hV_LIST_CONSTANTS_RELEASE 700
-
 
 ///
 /// * General parameters

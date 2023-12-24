@@ -1,3 +1,4 @@
+#pragma once
 ///
 /// @file hV_Font_Terminal.h
 /// @brief hV_Font_Terminal
@@ -147,7 +148,7 @@ class hV_Font_Terminal
     /// @return horizontal size of the string for current font, in pixels
     /// @n @b More: @ref Fonts
     ///
-    uint16_t f_stringSizeX(std::string text);
+    uint16_t f_stringSizeX(char* text);
 
     ///
     /// @brief Number of characters to fit a size, x-axis
@@ -156,7 +157,7 @@ class hV_Font_Terminal
     /// @return number of characters to be displayed inside the pixels
     /// @n @b More: @ref Fonts
     ///
-    uint8_t f_stringLengthToFitX(std::string text, uint16_t pixels);
+    uint8_t f_stringLengthToFitX(char* text, uint16_t pixels);
 
     ///
     /// @brief Number of fonts

@@ -1,3 +1,4 @@
+#pragma once
 ///
 /// @file hV_Configuration.h
 /// @brief Configuration of the options for Pervasive Displays Library Suite
@@ -37,7 +38,7 @@
 /// * Commercial edition: for professionals or organisations, commercial usage
 /// @n All rights reserved
 ///
-
+#include <zephyr/kernel.h>
 // SDK
 #include "hV_HAL_Peripherals.h"
 
@@ -52,7 +53,6 @@
 
 // List of screens
 #include "hV_List_Screens.h"
-
 
 // Checks
 #if (hV_LIST_CONSTANTS_RELEASE < 700)
@@ -72,7 +72,6 @@
 /// @brief Release
 ///
 #define hV_CONFIGURATION_RELEASE 702
-
 
 ///
 /// @name 1- List of supported Pervasive Displays screens

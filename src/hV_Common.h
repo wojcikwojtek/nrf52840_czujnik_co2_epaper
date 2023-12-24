@@ -1,3 +1,4 @@
+#pragma once
 ///
 /// @file hV_Common.h
 /// @brief Shared low-level libraries for the Pervasive Displays Library Suite
@@ -42,7 +43,6 @@
 
 #include "hV_Utilities_Common.h"
 #include "hV_Colours565.h"
-
 
 // Screen
 // #include "hV_Screen_Virtual.h"

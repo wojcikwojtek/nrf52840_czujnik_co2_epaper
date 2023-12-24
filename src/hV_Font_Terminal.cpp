@@ -22,8 +22,6 @@
 
 #include "hV_Font_Terminal.h"
 //#include "hV_Utilities_Common.h"
-#include <string>
-using namespace std;
 
 // The Arduino IDE doesn't allow to select the libraries, hence this condition.
 #if (FONT_MODE == USE_FONT_TERMINAL)
@@ -144,20 +142,20 @@ uint16_t hV_Font_Terminal::f_characterSizeY()
     return f_font.height;
 }
 
-uint16_t hV_Font_Terminal::f_stringSizeX(string text)
+uint16_t hV_Font_Terminal::f_stringSizeX(char* text)
 {
-    return (uint16_t) text.length() * f_font.maxWidth;
+    return (uint16_t) strlen(text) * f_font.maxWidth;
 }
 
-uint8_t hV_Font_Terminal::f_stringLengthToFitX(string text, uint16_t pixels)
+uint8_t hV_Font_Terminal::f_stringLengthToFitX(char* text, uint16_t pixels)
 {
     uint8_t index = 0;
 
     // Monospaced font
     index = pixels / f_font.maxWidth - 1;
-    if (index > text.length())
+    if (index > strlen(text))
     {
-        index = text.length();
+        index = strlen(text);
     }
     return index;
 }

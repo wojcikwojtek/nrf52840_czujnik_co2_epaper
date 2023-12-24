@@ -1,3 +1,4 @@
+#pragma once
 ///
 /// @file Terminal6x8e.h
 /// @brief Font Terminal 6 x 8

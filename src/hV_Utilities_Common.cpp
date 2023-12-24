@@ -19,10 +19,7 @@
 #include "hV_Utilities_Common.h"
 #include "stdarg.h"
 #include "stdio.h"
-#include <string>
-using namespace std;
-
-#define PI 3.1415926535897932384626433832795
+#include <math.h>
 
 //void delay_ms(uint32_t ms)
 //{
@@ -35,12 +32,7 @@ char bufferOut[128];
 
 // Code
 // Utilities
-long map(long x, long in_min, long in_max, long out_min, long out_max)
-{
-  return (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
-}
-
-string formatString(const char * format, ...)
+char* formatString(const char * format, ...)
 {
     memset(&bufferOut, 0x00, sizeof(bufferOut));
     va_list args;
@@ -48,12 +40,12 @@ string formatString(const char * format, ...)
     vsprintf(bufferOut, format, args);
 
     va_end(args);
-    return string(bufferOut);
+    return bufferOut;
 }
 
-string trimString(string text)
+const char* trimString(const char* text)
 {
-    string work = "";
+    //char[] work = "";
     bool flag = true;
     char c;
 
@@ -63,7 +55,7 @@ string trimString(string text)
     // Upwards from start
     index = 0;
     flag = true;
-    while ((index < text.length()) and flag)
+    while ((index < strlen(text)) and flag)
     {
         if ((text[index] != '\n') and (text[index] != '\r') and (text[index] != ' ') and (text[index] != '\t'))
         {
@@ -74,7 +66,7 @@ string trimString(string text)
     }
 
     // Downwards from end
-    index = text.length();
+    index = strlen(text);
     flag = true;
     while ((index > 0) and flag)
     {
@@ -86,7 +78,7 @@ string trimString(string text)
         index--;
     }
 
-    return text.substr(start, end);
+    return arduino_func.substring(text, start, end);
 }
 
 int32_t cos32x100(int32_t degreesX100)
@@ -121,39 +113,39 @@ int32_t cos32x100(int32_t degreesX100)
 
     if (degreesX100 < 1000)
     {
-        return i * map(degreesX100,    0, 1000, 100, 98);
+        return i * arduino_func.map(degreesX100,    0, 1000, 100, 98);
     }
     else if (degreesX100 < 2000)
     {
-        return i * map(degreesX100, 1000, 2000,  98, 93);
+        return i * arduino_func.map(degreesX100, 1000, 2000,  98, 93);
     }
     else if (degreesX100 < 3000)
     {
-        return i * map(degreesX100, 2000, 3000,  93, 86);
+        return i * arduino_func.map(degreesX100, 2000, 3000,  93, 86);
     }
     else if (degreesX100 < 4000)
     {
-        return i * map(degreesX100, 3000, 4000,  86, 76);
+        return i * arduino_func.map(degreesX100, 3000, 4000,  86, 76);
     }
     else if (degreesX100 < 5000)
     {
-        return i * map(degreesX100, 4000, 5000,  76, 64);
+        return i * arduino_func.map(degreesX100, 4000, 5000,  76, 64);
     }
     else if (degreesX100 < 6000)
     {
-        return i * map(degreesX100, 5000, 6000,  64, 50);
+        return i * arduino_func.map(degreesX100, 5000, 6000,  64, 50);
     }
     else if (degreesX100 < 7000)
     {
-        return i * map(degreesX100, 6000, 7000,  50, 34);
+        return i * arduino_func.map(degreesX100, 6000, 7000,  50, 34);
     }
     else if (degreesX100 < 8000)
     {
-        return i * map(degreesX100, 7000, 8000,  34, 17);
+        return i * arduino_func.map(degreesX100, 7000, 8000,  34, 17);
     }
     else
     {
-        return i * map(degreesX100, 8000, 9000,  17,  0);
+        return i * arduino_func.map(degreesX100, 8000, 9000,  17,  0);
     }
 }
 
@@ -187,7 +179,7 @@ void convertRectangle2Polar(uint16_t centerX, uint16_t centerY, uint16_t rectang
     else
     {
         float fAngle = -atan(fX / fY);
-        fAngle *= 360 / 2 / PI;
+        fAngle *= 360 / 2 / 3.14;
 
         if (fY > 0)
         {
@@ -200,12 +192,13 @@ void convertRectangle2Polar(uint16_t centerX, uint16_t centerY, uint16_t rectang
         angle = (uint16_t)fAngle;
     }
 }
-string utf2iso(string s)
+char* utf2iso(char* s)
 {
     uint8_t c;
-
+    //******
     //s.toCharArray(bufferIn, s.length() + 1);
-    strcpy(bufferIn, s.c_str());
+    //******
+    // strcpy(bufferIn, s.c_str());
 
     memset(&bufferOut, 0x00, sizeof(bufferOut));
 

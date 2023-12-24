@@ -1,3 +1,4 @@
+#pragma once
 ///
 /// @file hV_List_Boards.h
 /// @brief List of boards for Pervasive Displays Library Suite
@@ -28,7 +29,6 @@
 // SDK
 #include "stdint.h"
 
-
 #ifndef hV_LIST_BOARDS_RELEASE
 ///
 /// @brief Release
@@ -39,6 +39,41 @@
 /// @brief Not connected pin
 ///
 #define NOT_CONNECTED (uint8_t)0xff
+
+///INITIALIZATION OF NRF PINS
+
+#define EPD_RES DT_ALIAS(respin)
+#define EPD_CS DT_ALIAS(cspin)
+#define EPD_DC DT_ALIAS(dcpin)
+#define EPD_BUSY DT_ALIAS(busypin)
+
+static const struct gpio_dt_spec edp_res_pin = GPIO_DT_SPEC_GET(EPD_RES, gpios);
+static const struct gpio_dt_spec edp_cs_pin = GPIO_DT_SPEC_GET(EPD_CS, gpios);
+static const struct gpio_dt_spec edp_dc_pin = GPIO_DT_SPEC_GET(EPD_DC, gpios);
+static const struct gpio_dt_spec edp_busy_pin = GPIO_DT_SPEC_GET(EPD_BUSY, gpios);
+
+static Arduino_Own arduino_func;
+
+#define EPD_CS_0	gpio_pin_set_dt(&edp_cs_pin, 0); //GPIO_ResetBits(GPIOD, GPIO_Pin_8)
+#define EPD_CS_1	gpio_pin_set_dt(&edp_cs_pin, 1); //GPIO_SetBits(GPIOD, GPIO_Pin_8)
+
+#define EPD_DC_0	gpio_pin_set_dt(&edp_dc_pin, 0); //GPIO_ResetBits(GPIOE, GPIO_Pin_15)
+#define EPD_DC_1	gpio_pin_set_dt(&edp_dc_pin, 1); //GPIO_SetBits(GPIOE, GPIO_Pin_15)
+
+#define EPD_RST_0	gpio_pin_set_dt(&edp_res_pin, 0); //GPIO_ResetBits(GPIOE, GPIO_Pin_14)
+#define EPD_RST_1	gpio_pin_set_dt(&edp_res_pin, 1); //GPIO_SetBits(GPIOE, GPIO_Pin_14)
+
+#define EPD_BUSY_LEVEL 0
+#define isEPD_BUSY gpio_pin_get_dt(&edp_busy_pin) //GPIO_ReadInputDataBit(GPIOE, GPIO_Pin_13) 
+
+#define SPI_BUS DT_NODELABEL(spi1)
+
+static const struct device* spi_dev = DEVICE_DT_GET(SPI_BUS);
+
+static const struct spi_config spi_cfg = {
+  .frequency = 8000000,
+  .operation = SPI_WORD_SET(8) | SPI_TRANSFER_MSB | SPI_OP_MODE_MASTER
+};
 
 ///
 /// @brief Board configuration structure
@@ -421,22 +456,6 @@ const pins_t boardTeensy3x =
     .panelReset = 16, ///< EXT3 and EXT3-1 pin 5 Yellow
     .flashCS = 17, ///< EXT3 and EXT3-1 pin 8 Violet
     .panelCS = 18, ///< EXT3 and EXT3-1 pin 9 Grey
-    .panelCSS = NOT_CONNECTED, ///< EXT3 and EXT3-1 pin 12 Grey2
-    .flashCSS = NOT_CONNECTED, ///< EXT3 and EXT3-1 pin 20 Black2
-    .touchInt = NOT_CONNECTED, ///< EXT3-Touch pin 3 Red
-    .touchReset = NOT_CONNECTED, ///< EXT3-Touch pin 4 Orange
-    .panelPower = NOT_CONNECTED, ///< Optional power circuit
-    .cardCS = NOT_CONNECTED, ///< Separate SD-card board
-    .cardDetect = NOT_CONNECTED, ///< Separate SD-card board
-};
-
-const pins_t boardNRF52840DK_EXT3 = 
-{
-    .panelBusy = 14,
-    .panelDC = 15,
-    .panelReset = 16,
-    .flashCS = 12,
-    .panelCS = 13,
     .panelCSS = NOT_CONNECTED, ///< EXT3 and EXT3-1 pin 12 Grey2
     .flashCSS = NOT_CONNECTED, ///< EXT3 and EXT3-1 pin 20 Black2
     .touchInt = NOT_CONNECTED, ///< EXT3-Touch pin 3 Red

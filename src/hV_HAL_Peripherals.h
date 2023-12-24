@@ -1,3 +1,4 @@
+#pragma once
 ///
 /// @file hV_HAL_Peripherals.h
 /// @brief Light hardware abstraction layer for peripherals
@@ -34,16 +35,11 @@
 /// * Arduino SDK https://www.arduino.cc/reference/en/
 /// * Energia SDK https://energia.nu/reference/
 ///
-//#include <Arduino.h>
+#include "Arduino_Own.h"
 
 ///
 /// @brief SDK other libraries
 ///
-//#include <SPI.h>
-//#include <Wire.h>
-#include <zephyr/kernel.h>
-#include <zephyr/drivers/spi.h>
-#include <zephyr/drivers/gpio.h>
 
 ///
 /// @brief Other libraries
@@ -51,16 +47,9 @@
 #include <stdint.h>
 #include <stdio.h>
 #include <stdarg.h>
-
-#define SPI_NODE DT_NODELABEL(spi3)
-#define GPIO_NODE DT_NODELABEL(gpio1)
-
-static const struct device* spi_dev = DEVICE_DT_GET(SPI_NODE);
-static const struct spi_config spi_cfg = {
-    .frequency = 8000000,
-    .operation = SPI_OP_MODE_MASTER | SPI_TRANSFER_MSB | SPI_WORD_SET(8),
-    .cs = SPI_CS_CONTROL_INIT(DT_NODELABEL(spi3), 10)
-};
-static const struct device* gpio_dev = DEVICE_DT_GET(GPIO_NODE);
+#include <zephyr/kernel.h>
+#include <zephyr/device.h>
+#include <zephyr/drivers/gpio.h>
+#include <zephyr/drivers/spi.h>
 
 #endif // hV_HAL_PERIPHERALS_RELEASE

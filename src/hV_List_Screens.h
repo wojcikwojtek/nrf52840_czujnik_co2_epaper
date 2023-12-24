@@ -1,3 +1,4 @@
+#pragma once
 ///
 /// @file hV_List_Screens.h
 /// @brief List of supported Pervasive Displays screens
@@ -34,8 +35,6 @@
 /// @brief Release
 ///
 #define hV_LIST_SCREENS_RELEASE 702
-
-
 
 ///
 /// @brief Screen type

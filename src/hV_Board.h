@@ -1,3 +1,4 @@
+#pragma once
 ///
 /// @file hV_Board.h
 /// @brief Driver for Pervasive Displays EXT3, EXT3-1 and EXT3-Touch boards
@@ -29,8 +30,6 @@
 /// @brief Library release number
 ///
 #define hV_BOARD_RELEASE 700
-
-
 
 // Objects
 //
@@ -96,7 +95,7 @@ class hV_Board
     /// @param size number of bytes
     /// @note On large screens, b_sendIndexData() sends to both sub-panels
     ///
-    void b_sendIndexData(uint8_t index, const uint8_t * data, uint32_t size);
+    void b_sendIndexData(uint8_t index, uint8_t * data, uint32_t size);
 
     ///
     /// @brief Send data through SPI to the two halves of large screens
@@ -105,7 +104,7 @@ class hV_Board
     /// @param size number of bytes
     /// @note Valid only for 9.7 and 12.20" screens
     ///
-    void b_sendIndexDataBoth(uint8_t index, const uint8_t * data, uint32_t size);
+    void b_sendIndexDataBoth(uint8_t index, uint8_t * data, uint32_t size);
 
     ///
     /// @brief Send data through SPI to first half of large screens
@@ -114,7 +113,7 @@ class hV_Board
     /// @param size number of bytes
     /// @note Valid only for 9.7 and 12.20" screens
     ///
-    void b_sendIndexDataMaster(uint8_t index, const uint8_t * data, uint32_t size);
+    void b_sendIndexDataMaster(uint8_t index, uint8_t * data, uint32_t size);
 
     /// @brief Send data through SPI to second half of large screens
     /// @param index register
@@ -122,7 +121,7 @@ class hV_Board
     /// @param size number of bytes
     /// @note Valid only for 9.7 and 12.20" screens
     ///
-    void b_sendIndexDataSlave(uint8_t index, const uint8_t * data, uint32_t size);
+    void b_sendIndexDataSlave(uint8_t index, uint8_t * data, uint32_t size);
 
     ///
     /// @brief Wait for ready

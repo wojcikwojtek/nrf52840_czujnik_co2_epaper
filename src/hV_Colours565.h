@@ -1,3 +1,4 @@
+#pragma once
 ///
 /// @file hV_Colours565.h
 /// @brief Class Library for 5-6-5 coded colours
@@ -24,7 +25,6 @@
 /// @brief Library release number
 ///
 #define hV_COLOURS_RELEASE 700
-
 
 ///
 /// @class hV_Colours565

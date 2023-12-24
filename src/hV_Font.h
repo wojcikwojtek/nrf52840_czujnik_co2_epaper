@@ -1,3 +1,4 @@
+#pragma once
 ///
 /// @file hV_Font.h
 /// @brief Font structure
@@ -41,7 +42,6 @@
 // Configuration
 #include "hV_Configuration.h"
 
-
 // The Arduino IDE doesn't allow to select the libraries, hence this condition.
 #if (FONT_MODE == USE_FONT_TERMINAL)
 
@@ -50,8 +50,6 @@
 /// @brief hV_Font release number
 ///
 #define hV_FONT_HEADER_STRUCTURE_RELEASE 507
-
-
 
 ///
 /// @brief Structure for character width
