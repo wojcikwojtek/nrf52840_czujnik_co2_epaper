@@ -14,4 +14,5 @@ target_sources(app PRIVATE
     src/hV_Utilities_PDLS.cpp
     src/Screen_EPD_EXT3.cpp
     src/Arduino_Own.cpp
+    src/fram.cpp
 )
