@@ -1,15 +1,44 @@
-// To get started, press Ctrl+Space to bring up the completion menu and view the available nodes.
+/* Copyright (c) 2021 Nordic Semiconductor ASA
+ *
+ * SPDX-License-Identifier: LicenseRef-Nordic-5-Clause
+ */
 
-// You can also use the buttons in the sidebar to perform actions on nodes.
-// Actions currently available include:
+/ {
+	chosen {
+		nordic,pm-ext-flash = &mx25r64;
+	};
+};
 
-// * Enabling / disabling the node
-// * Adding the bus to a bus
-// * Removing the node
-// * Connecting ADC channels
 
-// For more help, browse the DeviceTree documentation at https://docs.zephyrproject.org/latest/guides/dts/index.html
-// You can also visit the nRF DeviceTree extension documentation at https://nrfconnect.github.io/vscode-nrf-connect/devicetree/nrfdevicetree.html
+/ {
+	/*
+	* In some default configurations within the nRF Connect SDK,
+	* e.g. on nRF52840, the chosen zephyr,entropy node is &cryptocell.
+	* This devicetree overlay ensures that default is overridden wherever it
+	* is set, as this application uses the RNG node for entropy exclusively.
+	*/
+	chosen {
+		zephyr,entropy = &rng;
+	};
+};
+
+/* Disable unused peripherals to reduce power consumption */
+&adc {
+	status = "disabled";
+};
+&uart1 {
+	status = "disabled";
+};
+&pwm0 {
+	status = "disabled";
+};
+&spi3 {
+	status = "disabled";
+};
+&usbd {
+	status = "disabled";
+};
+
 / {
     aliases {
         respin = "/epd_out/res";

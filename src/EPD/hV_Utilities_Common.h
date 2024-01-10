@@ -33,11 +33,11 @@
 ///
 #define hV_UTILITIES_RELEASE 702
 
-#ifndef min
-#define min(a, b) ((a) < (b) ? (a) : (b))
+#ifndef minEPD
+#define minEPD(a, b) ((a) < (b) ? (a) : (b))
 #endif
-#ifndef max
-#define max(a, b) ((a) > (b) ? (a) : (b))
+#ifndef maxEPD
+#define maxEPD(a, b) ((a) > (b) ? (a) : (b))
 #endif
 
 ///

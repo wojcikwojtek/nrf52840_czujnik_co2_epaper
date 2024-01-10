@@ -252,10 +252,10 @@ char* utf2iso(char* s)
 
 uint16_t checkRange(uint16_t value, uint16_t valueMin, uint16_t valueMax)
 {
-    uint16_t localMin = min(valueMin, valueMax);
-    uint16_t localMax = max(valueMin, valueMax);
+    uint16_t localMin = minEPD(valueMin, valueMax);
+    uint16_t localMax = maxEPD(valueMin, valueMax);
 
-    return min(max(localMin, value), localMax);
+    return minEPD(maxEPD(localMin, value), localMax);
 }
 
 void setMinMax(uint16_t value, uint16_t & valueMin, uint16_t & valueMax)

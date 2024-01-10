@@ -1,18 +1,68 @@
+#
+# Copyright (c) 2021 Nordic Semiconductor ASA
+#
+# SPDX-License-Identifier: LicenseRef-Nordic-5-Clause
+#
+
 cmake_minimum_required(VERSION 3.20.0)
-find_package(Zephyr REQUIRED HINTS $ENV{ZEPHYR_BASE})
 
-project(nrf52840_czujnik_co2_epaper)
+# Set Kconfig root files that will be processed as a first Kconfig for used child images.
+set(mcuboot_KCONFIG_ROOT "\\\${ZEPHYR_CONNECTEDHOMEIP_MODULE_DIR}/config/nrfconnect/chip-module/Kconfig.mcuboot.root")
+set(multiprotocol_rpmsg_KCONFIG_ROOT "\\\${ZEPHYR_CONNECTEDHOMEIP_MODULE_DIR}/config/nrfconnect/chip-module/Kconfig.multiprotocol_rpmsg.root")
+set(hci_rpmsg_KCONFIG_ROOT "\\\${ZEPHYR_CONNECTEDHOMEIP_MODULE_DIR}/config/nrfconnect/chip-module/Kconfig.hci_rpmsg.root")
 
-target_sources(app PRIVATE 
-    src/main.cpp
-    src/scd40.cpp
-    src/hV_Board.cpp
-    src/hV_Colours565.cpp
-    src/hV_Font_Terminal.cpp
-    src/hV_Screen_Buffer.cpp
-    src/hV_Utilities_Common.cpp
-    src/hV_Utilities_PDLS.cpp
-    src/Screen_EPD_EXT3.cpp
-    src/Arduino_Own.cpp
-    src/fram.cpp
+# For prj.conf the CONF_FILE is empty. In other case extract the exact file name from the path string.
+if(CONF_FILE)
+    get_filename_component(CONFIG_FILE_NAME ${CONF_FILE} NAME)
+endif()
+
+if(NOT "${CONFIG_FILE_NAME}" STREQUAL "prj_no_dfu.conf")
+    set(PM_STATIC_YML_FILE ${CMAKE_CURRENT_SOURCE_DIR}/configuration/${BOARD}/pm_static_dfu.yml)
+endif()
+
+find_package(Zephyr HINTS $ENV{ZEPHYR_BASE})
+
+project(matter_co2sensor)
+
+set(COMMON_ROOT ${ZEPHYR_NRF_MODULE_DIR}/samples/matter/common)
+set(NLIO_ROOT ${ZEPHYR_CONNECTEDHOMEIP_MODULE_DIR}/third_party/nlio/repo)
+include(${ZEPHYR_CONNECTEDHOMEIP_MODULE_DIR}/config/nrfconnect/app/enable-gnu-std.cmake)
+include(${ZEPHYR_CONNECTEDHOMEIP_MODULE_DIR}/src/app/chip_data_model.cmake)
+
+# NORDIC SDK APP START
+target_include_directories(app PRIVATE
+    src
+    ${COMMON_ROOT}/src
+    ${NLIO_ROOT}/include
+    ${ZEPHYR_CONNECTEDHOMEIP_MODULE_DIR}/zzz_generated/app-common
 )
+
+target_sources(app PRIVATE
+    src/app_task.cpp
+    src/main.cpp
+    src/zap-generated/IMClusterCommandHandler.cpp
+    src/zap-generated/callback-stub.cpp
+    src/scd40.cpp
+    src/fram.cpp
+    src/EPD/hV_Board.cpp
+    src/EPD/hV_Colours565.cpp
+    src/EPD/hV_Font_Terminal.cpp
+    src/EPD/hV_Screen_Buffer.cpp
+    src/EPD/hV_Utilities_Common.cpp
+    src/EPD/hV_Utilities_PDLS.cpp
+    src/EPD/Screen_EPD_EXT3.cpp
+    src/EPD/Arduino_Own.cpp
+    ${COMMON_ROOT}/src/led_widget.cpp
+)
+
+if(CONFIG_CHIP_OTA_REQUESTOR)
+    target_sources(app PRIVATE ${COMMON_ROOT}/src/ota_util.cpp)
+endif()
+
+chip_configure_data_model(app
+    INCLUDE_SERVER
+    BYPASS_IDL
+    GEN_DIR src/zap-generated
+    ZAP_FILE ${CMAKE_CURRENT_SOURCE_DIR}/src/template.zap
+)
+# NORDIC SDK APP END
