@@ -32,6 +32,7 @@
 #include <dk_buttons_and_leds.h>
 #include <zephyr/kernel.h>
 #include <zephyr/logging/log.h>
+#include <app-common/zap-generated/attributes/Accessors.h>
 
 LOG_MODULE_DECLARE(app, CONFIG_CHIP_APP_LOG_LEVEL);
 
@@ -90,9 +91,19 @@ Screen_EPD_EXT3 AppTask::myScreen = {eScreen_EPD_EXT3_154};
 
 k_timer sensorTimer;
 
-void SensorTimerHandler(k_timer* sensorTimer) {
-	AppTask task;
-	task.SensorPost();
+void SensorTimerHandler(k_timer* timer) {
+	AppEvent event;
+	event.Type = AppEventType::SensorMeasure;
+	event.Handler = AppTask::SensorMeasureHandler;
+	AppTask::Instance().PostEvent(event);
+}
+
+void StartSensorTimer() {
+	k_timer_start(&sensorTimer, K_SECONDS(60), K_SECONDS(60));
+}
+
+void StopSensorTimer() {
+	k_timer_stop(&sensorTimer);
 }
 
 CHIP_ERROR AppTask::Init()
@@ -112,10 +123,10 @@ CHIP_ERROR AppTask::Init()
 		return err;
 	}
 
-	//printk("Screen init\n");
-	//myScreen.begin();
-	//myScreen.clear();
-	//myScreen.flush();
+	printk("Screen init\n");
+	myScreen.begin();
+	myScreen.clear();
+	myScreen.flush();
 
 	if(!device_is_ready(i2c_dev)) {
 		printk("I2C device is not ready");
@@ -134,8 +145,6 @@ CHIP_ERROR AppTask::Init()
 		printk("Failed to start peariodic measurements\n");
 		return err;
 	}
-
-	StartSensorTimer(&sensorTimer);
 
 #if defined(CONFIG_NET_L2_OPENTHREAD)
 	err = ThreadStackMgr().InitThreadStack();
@@ -218,6 +227,10 @@ CHIP_ERROR AppTask::Init()
 		return err;
 	}
 
+	k_timer_init(&sensorTimer, &SensorTimerHandler, NULL);
+	k_timer_user_data_set(&sensorTimer, this);
+	StartSensorTimer();
+
 	return CHIP_NO_ERROR;
 }
 
@@ -248,12 +261,12 @@ void AppTask::ButtonEventHandler(uint32_t buttonState, uint32_t hasChanged)
 		button_event.Handler = FunctionHandler;
 		PostEvent(button_event);
 	}
-	if (SENSOR_BUTTON_MASK & hasChanged) {
-		button_event.ButtonEvent.PinNo = SENSOR_BUTTON;
+	if (LIGHT_SWITCH_BUTTON_MASK & hasChanged) {
+		button_event.ButtonEvent.PinNo = LIGHT_SWITCH_BUTTON;
 		button_event.ButtonEvent.Action =
-			static_cast<uint8_t>((SENSOR_BUTTON_MASK & buttonState) ? AppEventType::ButtonPushed :
+			static_cast<uint8_t>((LIGHT_SWITCH_BUTTON_MASK & buttonState) ? AppEventType::ButtonPushed :
 										    AppEventType::ButtonReleased);
-		button_event.Handler = SensorHandler;
+		button_event.Handler = LightSwitchHandler;
 		PostEvent(button_event);
 	}
 }
@@ -402,7 +415,7 @@ void AppTask::DispatchEvent(const AppEvent &event)
 
 void AppTask::displayFonts(uint16_t co2, uint16_t temperature_deg_c, uint16_t humidity_percent_rh) {
 	uint16_t y = 10;
-	myScreen.setOrientation(7);
+	myScreen.setOrientation(3);
 
 	myScreen.selectFont(Font_Terminal12x16);
 
@@ -424,40 +437,47 @@ void AppTask::displayFonts(uint16_t co2, uint16_t temperature_deg_c, uint16_t hu
 	myScreen.flush();
 }
 
-void AppTask::SensorHandler(const AppEvent &event) {
+void AppTask::SensorActivateHandler(const AppEvent &) {
+	StartSensorTimer();
+}
+
+void AppTask::SensorDeactivateHandler(const AppEvent &) {
+	StopSensorTimer();
+}
+
+void AppTask::SensorMeasureHandler(const AppEvent &) {
 	int ret;
 	uint16_t co2, temperature_deg_c, humidity_percent_rh;
 	int32_t temperature_m_deg_c, humidity_m_percent_rh;
-
-	if(event.ButtonEvent.Action == static_cast<uint8_t>(AppEventType::ButtonPushed)) {
-		ret = czujnik.scd4x_read_measurement(&co2, &temperature_m_deg_c, &humidity_m_percent_rh);
-		temperature_deg_c = temperature_m_deg_c/1000;
-		humidity_percent_rh = humidity_m_percent_rh/1000;
-		if(ret == 0) {
-			printk("////////////////////////////////\n");
-			printk("CO2: %d\nTemperature: %d\nHumidity: %d\n", co2, temperature_deg_c, humidity_percent_rh);
-			//myScreen.clear();
-			//displayFonts(co2, temperature_deg_c, humidity_percent_rh);
-			//ret = pamiec.save_sensor_data(co2, temperature_deg_c, humidity_percent_rh);
-			//uint16_t a, b, c;
-			//ret = pamiec.read_last_sensor_data(a, b, c);
-			//printk("Odczytanie z pamieci wartosci:\n");
-			//printk("CO2: %d\nTemperature: %d\nHumidity: %d\n", a, b, c);
-		}
+	ret = czujnik.scd4x_read_measurement(&co2, &temperature_m_deg_c, &humidity_m_percent_rh);
+	temperature_deg_c = temperature_m_deg_c/1000;
+	humidity_percent_rh = humidity_m_percent_rh/1000;
+	if(ret == 0) {
+		printk("////////////////////////////////\n");
+		printk("CO2: %d\nTemperature: %d\nHumidity: %d\n", co2, temperature_deg_c, humidity_percent_rh);
+		myScreen.clear();
+		displayFonts(co2, temperature_deg_c, humidity_percent_rh);
+		ret = pamiec.save_sensor_data(co2, temperature_deg_c, humidity_percent_rh);
+		uint16_t a, b, c;
+		ret = pamiec.read_last_sensor_data(a, b, c);
+		printk("Odczytanie z pamieci wartosci:\n");
+		printk("CO2: %d\nTemperature: %d\nHumidity: %d\n", a, b, c);
+		chip::app::Clusters::TemperatureMeasurement::Attributes::MeasuredValue::Set(1, temperature_deg_c);
+		chip::app::Clusters::RelativeHumidityMeasurement::Attributes::MeasuredValue::Set(2, humidity_percent_rh);
 	}
 }
 
-void AppTask::StartSensorTimer(k_timer* sensorTimer) {
-	k_timer_init(sensorTimer, SensorTimerHandler, NULL);
-	k_timer_start(sensorTimer, K_SECONDS(60), K_SECONDS(60));
-}
-
-void AppTask::SensorPost() {
-	AppEvent button_event;
-	button_event.Type = AppEventType::Button;
-
-	button_event.ButtonEvent.PinNo = SENSOR_BUTTON;
-	button_event.ButtonEvent.Action = static_cast<uint8_t>(AppEventType::ButtonPushed);
-	button_event.Handler = SensorHandler;
-	PostEvent(button_event);
+void AppTask::LightSwitchHandler(const AppEvent &event) {
+	bool onofflight;
+	if(event.ButtonEvent.Action == static_cast<uint8_t>(AppEventType::ButtonPushed)) {
+		chip::app::Clusters::OnOff::Attributes::OnOff::Get(3, &onofflight);
+		if(onofflight == true) {
+			chip::app::Clusters::OnOff::Attributes::OnOff::Set(3, false);
+			printk("turning light off\n");
+		}
+		else {
+			chip::app::Clusters::OnOff::Attributes::OnOff::Set(3, true);
+			printk("turning light on\n");
+		}
+	}
 }

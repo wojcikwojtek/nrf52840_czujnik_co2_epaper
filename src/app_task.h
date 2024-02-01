@@ -36,7 +36,11 @@ public:
 	CHIP_ERROR StartApp();
 
 	static void PostEvent(const AppEvent &event);
-	void SensorPost();
+
+	static void SensorActivateHandler(const AppEvent &);
+	static void SensorDeactivateHandler(const AppEvent &);
+	static void SensorMeasureHandler(const AppEvent &);
+	static void LightSwitchHandler(const AppEvent &event);
 
 private:
 	CHIP_ERROR Init();
@@ -58,9 +62,7 @@ private:
 	static void FunctionTimerTimeoutCallback(k_timer *timer);
 	static void UpdateStatusLED();
 
-	static void SensorHandler(const AppEvent &event);
 	static void displayFonts(uint16_t co2, uint16_t temperature_deg_c, uint16_t humidity_percent_rh);
-	void StartSensorTimer(k_timer* sensorTimer);
 
 	FunctionEvent mFunction = FunctionEvent::NoneSelected;
 	bool mFunctionTimerActive = false;
