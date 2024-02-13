@@ -4425,335 +4425,6 @@ grid 2.54 mm</description>
 </deviceset>
 </devicesets>
 </library>
-<library name="LED">
-<description>&lt;B&gt;LED parts CHIP-Flat Top, Round Top</description>
-<packages>
-<package name="LEDC1608X35N_FLAT-R" urn="urn:adsk.eagle:footprint:24294736/1">
-<description>Chip LED, 1.60 X 0.80 X 0.35 mm body
- &lt;p&gt;Chip LED package with body size 1.60 X 0.80 X 0.35 mm&lt;/p&gt;</description>
-<smd name="C" x="-0.75" y="0" dx="0.6118" dy="0.9118" layer="1"/>
-<smd name="A" x="0.75" y="0" dx="0.6118" dy="0.9118" layer="1"/>
-<wire x1="-1.3099" y1="0.7699" x2="0.8" y2="0.7699" width="0.12" layer="21"/>
-<wire x1="-1.3099" y1="0.7699" x2="-1.3099" y2="-0.7699" width="0.12" layer="21"/>
-<wire x1="-1.3099" y1="-0.7699" x2="0.8" y2="-0.7699" width="0.12" layer="21"/>
-<wire x1="-0.8" y1="-0.4" x2="-0.8" y2="0.4" width="0.12" layer="51"/>
-<wire x1="-0.8" y1="0.4" x2="0.8" y2="0.4" width="0.12" layer="51"/>
-<wire x1="0.8" y1="0.4" x2="0.8" y2="-0.4" width="0.12" layer="51"/>
-<wire x1="0.8" y1="-0.4" x2="-0.8" y2="-0.4" width="0.12" layer="51"/>
-<text x="-0.127" y="1.4049" size="1.27" layer="25" align="bottom-center">&gt;NAME</text>
-<text x="-0.127" y="-1.4049" size="1.27" layer="27" align="top-center">&gt;VALUE</text>
-</package>
-<package name="LEDC1608X55N_FLAT-R" urn="urn:adsk.eagle:footprint:24294737/1">
-<description>Chip LED, 1.60 X 0.80 X 0.55 mm body
- &lt;p&gt;Chip LED package with body size 1.60 X 0.80 X 0.55 mm&lt;/p&gt;</description>
-<smd name="C" x="-0.75" y="0" dx="0.6118" dy="0.9118" layer="1"/>
-<smd name="A" x="0.75" y="0" dx="0.6118" dy="0.9118" layer="1"/>
-<wire x1="-1.3099" y1="0.7699" x2="0.8" y2="0.7699" width="0.12" layer="21"/>
-<wire x1="-1.3099" y1="0.7699" x2="-1.3099" y2="-0.7699" width="0.12" layer="21"/>
-<wire x1="-1.3099" y1="-0.7699" x2="0.8" y2="-0.7699" width="0.12" layer="21"/>
-<wire x1="-0.8" y1="-0.4" x2="-0.8" y2="0.4" width="0.12" layer="51"/>
-<wire x1="-0.8" y1="0.4" x2="0.8" y2="0.4" width="0.12" layer="51"/>
-<wire x1="0.8" y1="0.4" x2="0.8" y2="-0.4" width="0.12" layer="51"/>
-<wire x1="0.8" y1="-0.4" x2="-0.8" y2="-0.4" width="0.12" layer="51"/>
-<text x="-0.127" y="1.4049" size="1.27" layer="25" align="bottom-center">&gt;NAME</text>
-<text x="-0.127" y="-1.4049" size="1.27" layer="27" align="top-center">&gt;VALUE</text>
-</package>
-<package name="LEDC1608X80N_FLAT-R" urn="urn:adsk.eagle:footprint:24294739/1">
-<description>Chip LED, 1.60 X 0.80 X 0.80 mm body
- &lt;p&gt;Chip LED package with body size 1.60 X 0.80 X 0.80 mm&lt;/p&gt;</description>
-<smd name="C" x="-0.75" y="0" dx="0.6118" dy="0.9118" layer="1"/>
-<smd name="A" x="0.75" y="0" dx="0.6118" dy="0.9118" layer="1"/>
-<wire x1="-1.3099" y1="0.7699" x2="0.8" y2="0.7699" width="0.12" layer="21"/>
-<wire x1="-1.3099" y1="0.7699" x2="-1.3099" y2="-0.7699" width="0.12" layer="21"/>
-<wire x1="-1.3099" y1="-0.7699" x2="0.8" y2="-0.7699" width="0.12" layer="21"/>
-<wire x1="-0.8" y1="-0.4" x2="-0.8" y2="0.4" width="0.12" layer="51"/>
-<wire x1="-0.8" y1="0.4" x2="0.8" y2="0.4" width="0.12" layer="51"/>
-<wire x1="0.8" y1="0.4" x2="0.8" y2="-0.4" width="0.12" layer="51"/>
-<wire x1="0.8" y1="-0.4" x2="-0.8" y2="-0.4" width="0.12" layer="51"/>
-<text x="-0.127" y="1.4049" size="1.27" layer="25" align="bottom-center">&gt;NAME</text>
-<text x="-0.127" y="-1.4049" size="1.27" layer="27" align="top-center">&gt;VALUE</text>
-</package>
-<package name="LEDC2012X110N_FLAT-R" urn="urn:adsk.eagle:footprint:24294742/1">
-<description>Chip LED, 2.00 X 1.25 X 1.10 mm body
- &lt;p&gt;Chip LED package with body size 2.00 X 1.25 X 1.10 mm&lt;/p&gt;</description>
-<smd name="C" x="-1.025" y="0" dx="0.7618" dy="1.3618" layer="1"/>
-<smd name="A" x="1.025" y="0" dx="0.7618" dy="1.3618" layer="1"/>
-<wire x1="-1.6599" y1="0.9949" x2="1" y2="0.9949" width="0.12" layer="21"/>
-<wire x1="-1.6599" y1="0.9949" x2="-1.6599" y2="-0.9949" width="0.12" layer="21"/>
-<wire x1="-1.6599" y1="-0.9949" x2="1" y2="-0.9949" width="0.12" layer="21"/>
-<wire x1="-1" y1="-0.625" x2="-1" y2="0.625" width="0.12" layer="51"/>
-<wire x1="-1" y1="0.625" x2="1" y2="0.625" width="0.12" layer="51"/>
-<wire x1="1" y1="0.625" x2="1" y2="-0.625" width="0.12" layer="51"/>
-<wire x1="1" y1="-0.625" x2="-1" y2="-0.625" width="0.12" layer="51"/>
-<text x="-0.127" y="1.6299" size="1.27" layer="25" align="bottom-center">&gt;NAME</text>
-<text x="-0.127" y="-1.6299" size="1.27" layer="27" align="top-center">&gt;VALUE</text>
-</package>
-<package name="LEDC3216X75N_FLAT-R" urn="urn:adsk.eagle:footprint:24294744/1">
-<description>Chip LED, 3.20 X 1.60 X 0.75 mm body
- &lt;p&gt;Chip LED package with body size 3.20 X 1.60 X 0.75 mm&lt;/p&gt;</description>
-<smd name="C" x="-1.525" y="0" dx="0.9618" dy="1.7118" layer="1"/>
-<smd name="A" x="1.525" y="0" dx="0.9618" dy="1.7118" layer="1"/>
-<wire x1="-2.2599" y1="1.1699" x2="1.6" y2="1.1699" width="0.12" layer="21"/>
-<wire x1="-2.2599" y1="1.1699" x2="-2.2599" y2="-1.1699" width="0.12" layer="21"/>
-<wire x1="-2.2599" y1="-1.1699" x2="1.6" y2="-1.1699" width="0.12" layer="21"/>
-<wire x1="-1.6" y1="-0.8" x2="-1.6" y2="0.8" width="0.12" layer="51"/>
-<wire x1="-1.6" y1="0.8" x2="1.6" y2="0.8" width="0.12" layer="51"/>
-<wire x1="1.6" y1="0.8" x2="1.6" y2="-0.8" width="0.12" layer="51"/>
-<wire x1="1.6" y1="-0.8" x2="-1.6" y2="-0.8" width="0.12" layer="51"/>
-<text x="-0.127" y="1.8049" size="1.27" layer="25" align="bottom-center">&gt;NAME</text>
-<text x="-0.127" y="-1.8049" size="1.27" layer="27" align="top-center">&gt;VALUE</text>
-</package>
-<package name="LEDC1005X25N_FLAT-R" urn="urn:adsk.eagle:footprint:24294731/1">
-<description>Chip LED, 1.00 X 0.50 X 0.25 mm body
- &lt;p&gt;Chip LED package with body size 1.00 X 0.50 X 0.25 mm&lt;/p&gt;</description>
-<smd name="C" x="-0.45" y="0" dx="0.7" dy="0.5" layer="1"/>
-<smd name="A" x="0.45" y="0" dx="0.7" dy="0.5" layer="1"/>
-<wire x1="-1.0099" y1="0.6199" x2="0.5" y2="0.6199" width="0.12" layer="21"/>
-<wire x1="-1.0099" y1="0.6199" x2="-1.0099" y2="-0.6199" width="0.12" layer="21"/>
-<wire x1="-1.0099" y1="-0.6199" x2="0.5" y2="-0.6199" width="0.12" layer="21"/>
-<wire x1="-0.5" y1="-0.25" x2="-0.5" y2="0.25" width="0.12" layer="51"/>
-<wire x1="-0.5" y1="0.25" x2="0.5" y2="0.25" width="0.12" layer="51"/>
-<wire x1="0.5" y1="0.25" x2="0.5" y2="-0.25" width="0.12" layer="51"/>
-<wire x1="0.5" y1="-0.25" x2="-0.5" y2="-0.25" width="0.12" layer="51"/>
-<text x="-0.127" y="1.2549" size="1.27" layer="25" align="bottom-center">&gt;NAME</text>
-<text x="-0.127" y="-1.2549" size="1.27" layer="27" align="top-center">&gt;VALUE</text>
-</package>
-</packages>
-<packages3d>
-<package3d name="LEDC1608X35N_FLAT-R" urn="urn:adsk.eagle:package:24294797/1" type="model">
-<description>Chip LED, 1.60 X 0.80 X 0.35 mm body
- &lt;p&gt;Chip LED package with body size 1.60 X 0.80 X 0.35 mm&lt;/p&gt;</description>
-<packageinstances>
-<packageinstance name="LEDC1608X35N_FLAT-R"/>
-</packageinstances>
-</package3d>
-<package3d name="LEDC1608X55N_FLAT-R" urn="urn:adsk.eagle:package:24294799/1" type="model">
-<description>Chip LED, 1.60 X 0.80 X 0.55 mm body
- &lt;p&gt;Chip LED package with body size 1.60 X 0.80 X 0.55 mm&lt;/p&gt;</description>
-<packageinstances>
-<packageinstance name="LEDC1608X55N_FLAT-R"/>
-</packageinstances>
-</package3d>
-<package3d name="LEDC1608X80N_FLAT-R" urn="urn:adsk.eagle:package:24294802/1" type="model">
-<description>Chip LED, 1.60 X 0.80 X 0.80 mm body
- &lt;p&gt;Chip LED package with body size 1.60 X 0.80 X 0.80 mm&lt;/p&gt;</description>
-<packageinstances>
-<packageinstance name="LEDC1608X80N_FLAT-R"/>
-</packageinstances>
-</package3d>
-<package3d name="LEDC2012X110N_FLAT-R" urn="urn:adsk.eagle:package:24294806/1" type="model">
-<description>Chip LED, 2.00 X 1.25 X 1.10 mm body
- &lt;p&gt;Chip LED package with body size 2.00 X 1.25 X 1.10 mm&lt;/p&gt;</description>
-<packageinstances>
-<packageinstance name="LEDC2012X110N_FLAT-R"/>
-</packageinstances>
-</package3d>
-<package3d name="LEDC3216X75N_FLAT-R" urn="urn:adsk.eagle:package:24294810/1" type="model">
-<description>Chip LED, 3.20 X 1.60 X 0.75 mm body
- &lt;p&gt;Chip LED package with body size 3.20 X 1.60 X 0.75 mm&lt;/p&gt;</description>
-<packageinstances>
-<packageinstance name="LEDC3216X75N_FLAT-R"/>
-</packageinstances>
-</package3d>
-<package3d name="LEDC1005X25N_FLAT-R" urn="urn:adsk.eagle:package:24294790/1" type="model">
-<description>Chip LED, 1.00 X 0.50 X 0.25 mm body
- &lt;p&gt;Chip LED package with body size 1.00 X 0.50 X 0.25 mm&lt;/p&gt;</description>
-<packageinstances>
-<packageinstance name="LEDC1005X25N_FLAT-R"/>
-</packageinstances>
-</package3d>
-</packages3d>
-<symbols>
-<symbol name="LED" urn="urn:adsk.eagle:symbol:22900757/4">
-<wire x1="1.27" y1="0" x2="0" y2="-2.54" width="0.254" layer="94"/>
-<wire x1="0" y1="-2.54" x2="-1.27" y2="0" width="0.254" layer="94"/>
-<wire x1="1.27" y1="-2.54" x2="0" y2="-2.54" width="0.254" layer="94"/>
-<wire x1="0" y1="-2.54" x2="-1.27" y2="-2.54" width="0.254" layer="94"/>
-<wire x1="1.27" y1="0" x2="-1.27" y2="0" width="0.254" layer="94"/>
-<wire x1="-2.032" y1="-0.762" x2="-3.429" y2="-2.159" width="0.1524" layer="94"/>
-<wire x1="-1.905" y1="-1.905" x2="-3.302" y2="-3.302" width="0.1524" layer="94"/>
-<text x="2.54" y="-0.762" size="1.778" layer="95" rot="R180" align="top-right">&gt;NAME</text>
-<text x="2.54" y="-3.302" size="1.778" layer="96" rot="R180" align="top-right">&gt;VALUE</text>
-<pin name="C" x="0" y="-5.08" visible="off" length="short" direction="pas" rot="R90"/>
-<pin name="A" x="0" y="2.54" visible="off" length="short" direction="pas" rot="R270"/>
-<polygon width="0.1524" layer="94" pour="solid">
-<vertex x="-3.048" y="-1.27"/>
-<vertex x="-3.429" y="-2.159"/>
-<vertex x="-2.54" y="-1.778"/>
-</polygon>
-<polygon width="0.1524" layer="94" pour="solid">
-<vertex x="-2.921" y="-2.413"/>
-<vertex x="-3.302" y="-3.302"/>
-<vertex x="-2.413" y="-2.921"/>
-</polygon>
-</symbol>
-</symbols>
-<devicesets>
-<deviceset name="CHIP-FLAT-R" urn="urn:adsk.eagle:component:22900849/6" prefix="D" uservalue="yes">
-<gates>
-<gate name="G$1" symbol="LED" x="0" y="0"/>
-</gates>
-<devices>
-<device name="_0603-0.35MM" package="LEDC1608X35N_FLAT-R">
-<connects>
-<connect gate="G$1" pin="A" pad="A"/>
-<connect gate="G$1" pin="C" pad="C"/>
-</connects>
-<package3dinstances>
-<package3dinstance package3d_urn="urn:adsk.eagle:package:24294797/1"/>
-</package3dinstances>
-<technologies>
-<technology name="">
-<attribute name="CATEGORY" value="LED" constant="no"/>
-<attribute name="COLOR" value="RED" constant="no"/>
-<attribute name="DESCRIPTION" value="CHIP LED FLAT" constant="no"/>
-<attribute name="MANUFACTURER" value="" constant="no"/>
-<attribute name="MPN" value="" constant="no"/>
-<attribute name="OPERATING_TEMP" value="" constant="no"/>
-<attribute name="PART_STATUS" value="" constant="no"/>
-<attribute name="ROHS_COMPLIANT" value="" constant="no"/>
-<attribute name="SERIES" value="" constant="no"/>
-<attribute name="SUB-CATEGORY" value="CHIP" constant="no"/>
-<attribute name="THERMALLOSS" value="" constant="no"/>
-<attribute name="TYPE" value="FLAT_TOP" constant="no"/>
-<attribute name="VALUE" value="LED_RED" constant="no"/>
-</technology>
-</technologies>
-</device>
-<device name="_0603-0.55MM" package="LEDC1608X55N_FLAT-R">
-<connects>
-<connect gate="G$1" pin="A" pad="A"/>
-<connect gate="G$1" pin="C" pad="C"/>
-</connects>
-<package3dinstances>
-<package3dinstance package3d_urn="urn:adsk.eagle:package:24294799/1"/>
-</package3dinstances>
-<technologies>
-<technology name="">
-<attribute name="CATEGORY" value="LED" constant="no"/>
-<attribute name="COLOR" value="RED" constant="no"/>
-<attribute name="DESCRIPTION" value="CHIP LED FLAT" constant="no"/>
-<attribute name="MANUFACTURER" value="" constant="no"/>
-<attribute name="MPN" value="" constant="no"/>
-<attribute name="OPERATING_TEMP" value="" constant="no"/>
-<attribute name="PART_STATUS" value="" constant="no"/>
-<attribute name="ROHS_COMPLIANT" value="" constant="no"/>
-<attribute name="SERIES" value="" constant="no"/>
-<attribute name="SUB-CATEGORY" value="CHIP" constant="no"/>
-<attribute name="THERMALLOSS" value="" constant="no"/>
-<attribute name="TYPE" value="FLAT_TOP" constant="no"/>
-<attribute name="VALUE" value="LED_RED" constant="no"/>
-</technology>
-</technologies>
-</device>
-<device name="_0603-0.80MM" package="LEDC1608X80N_FLAT-R">
-<connects>
-<connect gate="G$1" pin="A" pad="A"/>
-<connect gate="G$1" pin="C" pad="C"/>
-</connects>
-<package3dinstances>
-<package3dinstance package3d_urn="urn:adsk.eagle:package:24294802/1"/>
-</package3dinstances>
-<technologies>
-<technology name="">
-<attribute name="CATEGORY" value="LED" constant="no"/>
-<attribute name="COLOR" value="RED" constant="no"/>
-<attribute name="DESCRIPTION" value="CHIP LED FLAT" constant="no"/>
-<attribute name="MANUFACTURER" value="" constant="no"/>
-<attribute name="MPN" value="" constant="no"/>
-<attribute name="OPERATING_TEMP" value="" constant="no"/>
-<attribute name="PART_STATUS" value="" constant="no"/>
-<attribute name="ROHS_COMPLIANT" value="" constant="no"/>
-<attribute name="SERIES" value="" constant="no"/>
-<attribute name="SUB-CATEGORY" value="CHIP" constant="no"/>
-<attribute name="THERMALLOSS" value="" constant="no"/>
-<attribute name="TYPE" value="FLAT_TOP" constant="no"/>
-<attribute name="VALUE" value="LED_RED" constant="no"/>
-</technology>
-</technologies>
-</device>
-<device name="_0805" package="LEDC2012X110N_FLAT-R">
-<connects>
-<connect gate="G$1" pin="A" pad="A"/>
-<connect gate="G$1" pin="C" pad="C"/>
-</connects>
-<package3dinstances>
-<package3dinstance package3d_urn="urn:adsk.eagle:package:24294806/1"/>
-</package3dinstances>
-<technologies>
-<technology name="">
-<attribute name="CATEGORY" value="LED" constant="no"/>
-<attribute name="COLOR" value="RED" constant="no"/>
-<attribute name="DESCRIPTION" value="CHIP LED FLAT" constant="no"/>
-<attribute name="MANUFACTURER" value="" constant="no"/>
-<attribute name="MPN" value="" constant="no"/>
-<attribute name="OPERATING_TEMP" value="" constant="no"/>
-<attribute name="PART_STATUS" value="" constant="no"/>
-<attribute name="ROHS_COMPLIANT" value="" constant="no"/>
-<attribute name="SERIES" value="" constant="no"/>
-<attribute name="SUB-CATEGORY" value="CHIP" constant="no"/>
-<attribute name="THERMALLOSS" value="" constant="no"/>
-<attribute name="TYPE" value="FLAT_TOP" constant="no"/>
-<attribute name="VALUE" value="LED_RED" constant="no"/>
-</technology>
-</technologies>
-</device>
-<device name="_1206" package="LEDC3216X75N_FLAT-R">
-<connects>
-<connect gate="G$1" pin="A" pad="A"/>
-<connect gate="G$1" pin="C" pad="C"/>
-</connects>
-<package3dinstances>
-<package3dinstance package3d_urn="urn:adsk.eagle:package:24294810/1"/>
-</package3dinstances>
-<technologies>
-<technology name="">
-<attribute name="CATEGORY" value="LED" constant="no"/>
-<attribute name="COLOR" value="RED" constant="no"/>
-<attribute name="DESCRIPTION" value="CHIP LED FLAT" constant="no"/>
-<attribute name="MANUFACTURER" value="" constant="no"/>
-<attribute name="MPN" value="" constant="no"/>
-<attribute name="OPERATING_TEMP" value="" constant="no"/>
-<attribute name="PART_STATUS" value="" constant="no"/>
-<attribute name="ROHS_COMPLIANT" value="" constant="no"/>
-<attribute name="SERIES" value="" constant="no"/>
-<attribute name="SUB-CATEGORY" value="CHIP" constant="no"/>
-<attribute name="THERMALLOSS" value="" constant="no"/>
-<attribute name="TYPE" value="FLAT_TOP" constant="no"/>
-<attribute name="VALUE" value="LED_RED" constant="no"/>
-</technology>
-</technologies>
-</device>
-<device name="_0402" package="LEDC1005X25N_FLAT-R">
-<connects>
-<connect gate="G$1" pin="A" pad="A"/>
-<connect gate="G$1" pin="C" pad="C"/>
-</connects>
-<package3dinstances>
-<package3dinstance package3d_urn="urn:adsk.eagle:package:24294790/1"/>
-</package3dinstances>
-<technologies>
-<technology name="">
-<attribute name="CATEGORY" value="LED" constant="no"/>
-<attribute name="COLOR" value="RED" constant="no"/>
-<attribute name="DESCRIPTION" value="CHIP LED FLAT" constant="no"/>
-<attribute name="MANUFACTURER" value="" constant="no"/>
-<attribute name="MPN" value="" constant="no"/>
-<attribute name="OPERATING_TEMP" value="" constant="no"/>
-<attribute name="PART_STATUS" value="" constant="no"/>
-<attribute name="ROHS_COMPLIANT" value="" constant="no"/>
-<attribute name="SERIES" value="" constant="no"/>
-<attribute name="SUB-CATEGORY" value="CHIP" constant="no"/>
-<attribute name="THERMALLOSS" value="" constant="no"/>
-<attribute name="TYPE" value="FLAT_TOP" constant="no"/>
-<attribute name="VALUE" value="LED_RED" constant="no"/>
-</technology>
-</technologies>
-</device>
-</devices>
-</deviceset>
-</devicesets>
-</library>
 <library name="Biblioteka" urn="urn:adsk.wipprod:fs.file:vf.O-cfOsubQTu2HNn45N_EGQ">
 <description>&lt;b&gt;https://componentsearchengine.com&lt;/b&gt;&lt;p&gt;
 &lt;author&gt;Created by SamacSys&lt;/author&gt;</description>
@@ -4899,6 +4570,53 @@ Source: &lt;a href="https://cdn.amphenol-cs.com/media/wysiwyg/files/drawing/f34g
 </deviceset>
 </devicesets>
 </library>
+<library name="N0M59S10IC" urn="urn:adsk.wipprod:fs.file:vf.S77eDUjJS8qFZARyPbMuKQ">
+<packages>
+<package name="N0M59S10IC" library_version="2">
+<wire x1="0.06" y1="0.06" x2="1.44" y2="0.06" width="0.127" layer="21"/>
+<wire x1="1.44" y1="0.06" x2="1.44" y2="1.54" width="0.127" layer="21"/>
+<wire x1="1.44" y1="1.54" x2="0.07" y2="1.54" width="0.127" layer="21"/>
+<wire x1="0.07" y1="1.54" x2="0.06" y2="0.06" width="0.127" layer="21"/>
+<smd name="DOUT" x="0.34" y="1.4" dx="0.55" dy="0.4" layer="1"/>
+<smd name="VDD" x="1.15" y="1.4" dx="0.55" dy="0.4" layer="1"/>
+<smd name="VSS" x="0.34" y="0.2" dx="0.55" dy="0.4" layer="1"/>
+<smd name="DIN" x="1.15" y="0.2" dx="0.55" dy="0.4" layer="1"/>
+<text x="-0.05" y="1.84" size="1.27" layer="25">N0M59S10IC</text>
+</package>
+</packages>
+<symbols>
+<symbol name="N0M59S10IC" library_version="2">
+<wire x1="0" y1="0" x2="15.24" y2="0" width="0.1524" layer="94"/>
+<wire x1="15.24" y1="0" x2="15.24" y2="10.16" width="0.1524" layer="94"/>
+<wire x1="15.24" y1="10.16" x2="0" y2="10.16" width="0.1524" layer="94"/>
+<wire x1="0" y1="10.16" x2="0" y2="0" width="0.1524" layer="94"/>
+<pin name="VSS" x="-5.08" y="7.62" length="middle"/>
+<pin name="DOUT" x="-5.08" y="2.54" length="middle"/>
+<pin name="DIN" x="20.32" y="7.62" length="middle" rot="R180"/>
+<pin name="VDD" x="20.32" y="2.54" length="middle" rot="R180"/>
+</symbol>
+</symbols>
+<devicesets>
+<deviceset name="N0M59S10IC" library_version="2">
+<gates>
+<gate name="G$1" symbol="N0M59S10IC" x="-12.7" y="10.16"/>
+</gates>
+<devices>
+<device name="" package="N0M59S10IC">
+<connects>
+<connect gate="G$1" pin="DIN" pad="DIN"/>
+<connect gate="G$1" pin="DOUT" pad="DOUT"/>
+<connect gate="G$1" pin="VDD" pad="VDD"/>
+<connect gate="G$1" pin="VSS" pad="VSS"/>
+</connects>
+<technologies>
+<technology name=""/>
+</technologies>
+</device>
+</devices>
+</deviceset>
+</devicesets>
+</library>
 </libraries>
 <attributes>
 </attributes>
@@ -4990,11 +4708,12 @@ Source: &lt;a href="https://cdn.amphenol-cs.com/media/wysiwyg/files/drawing/f34g
 <part name="FRAME3" library="frames" library_urn="urn:adsk.eagle:library:229" deviceset="A4L-LOC" device=""/>
 <part name="JP3" library="Connector" deviceset="PINHD-1X5" device="" package3d_urn="urn:adsk.eagle:package:22469/2"/>
 <part name="S1" library="SamacSys_Parts" deviceset="MX1A-C1NN" device=""/>
-<part name="D1" library="LED" deviceset="CHIP-FLAT-R" device="_0603-0.35MM" package3d_urn="urn:adsk.eagle:package:24294797/1" value="LED_RED"/>
 <part name="H3" library="holes" library_urn="urn:adsk.eagle:library:237" deviceset="MOUNT-HOLE" device="2.8" package3d_urn="urn:adsk.eagle:package:14271/1"/>
 <part name="H4" library="holes" library_urn="urn:adsk.eagle:library:237" deviceset="MOUNT-HOLE" device="2.8" package3d_urn="urn:adsk.eagle:package:14271/1"/>
 <part name="J1" library="Biblioteka" library_urn="urn:adsk.wipprod:fs.file:vf.O-cfOsubQTu2HNn45N_EGQ" deviceset="F34G-1A7Q1-E8C24" device=""/>
-<part name="R7" library="Resistor" deviceset="R" device="CHIP-0402(1005-METRIC)" package3d_urn="urn:adsk.eagle:package:16378568/2" technology="_" value="220"/>
+<part name="U$1" library="N0M59S10IC" library_urn="urn:adsk.wipprod:fs.file:vf.S77eDUjJS8qFZARyPbMuKQ" deviceset="N0M59S10IC" device=""/>
+<part name="C8" library="Capacitor" deviceset="C" device="CHIP-0603(1608-METRIC)" package3d_urn="urn:adsk.eagle:package:16290898/2" technology="_" value="0.1uF"/>
+<part name="SUPPLY25" library="Power_Symbols" deviceset="GND-EARTH" device="" value="GND"/>
 </parts>
 <sheets>
 <sheet>
@@ -5772,10 +5491,6 @@ Source: &lt;a href="https://cdn.amphenol-cs.com/media/wysiwyg/files/drawing/f34g
 <attribute name="NAME" x="219.71" y="160.02" size="1.778" layer="95" align="center-left"/>
 <attribute name="VALUE" x="219.71" y="157.48" size="1.778" layer="96" align="center-left"/>
 </instance>
-<instance part="D1" gate="G$1" x="218.44" y="142.24" smashed="yes" rot="R270">
-<attribute name="NAME" x="220.98" y="137.922" size="1.778" layer="95" align="top-right"/>
-<attribute name="VALUE" x="220.98" y="140.462" size="1.778" layer="96" align="top-right"/>
-</instance>
 <instance part="H3" gate="G$1" x="228.6" y="76.2" smashed="yes">
 <attribute name="NAME" x="230.632" y="76.7842" size="1.778" layer="95"/>
 <attribute name="VALUE" x="230.632" y="73.7362" size="1.778" layer="96"/>
@@ -5784,9 +5499,13 @@ Source: &lt;a href="https://cdn.amphenol-cs.com/media/wysiwyg/files/drawing/f34g
 <attribute name="NAME" x="230.632" y="69.1642" size="1.778" layer="95"/>
 <attribute name="VALUE" x="230.632" y="66.1162" size="1.778" layer="96"/>
 </instance>
-<instance part="R7" gate="G$1" x="228.6" y="142.24" smashed="yes" rot="R180">
-<attribute name="NAME" x="228.6" y="139.7" size="1.778" layer="95" rot="R180" align="center"/>
-<attribute name="VALUE" x="228.6" y="144.78" size="1.778" layer="96" rot="R180" align="center"/>
+<instance part="U$1" gate="G$1" x="223.52" y="137.16" smashed="yes"/>
+<instance part="C8" gate="G$1" x="246.38" y="134.62" smashed="yes">
+<attribute name="NAME" x="248.92" y="134.62" size="1.778" layer="95"/>
+<attribute name="VALUE" x="248.92" y="132.08" size="1.778" layer="96"/>
+</instance>
+<instance part="SUPPLY25" gate="G$1" x="246.38" y="124.46" smashed="yes">
+<attribute name="VALUE" x="246.38" y="121.285" size="1.778" layer="96" align="center"/>
 </instance>
 </instances>
 <busses>
@@ -5860,6 +5579,15 @@ Source: &lt;a href="https://cdn.amphenol-cs.com/media/wysiwyg/files/drawing/f34g
 <wire x1="231.14" y1="127" x2="231.14" y2="124.46" width="0.1524" layer="91"/>
 <junction x="231.14" y="124.46"/>
 <label x="226.06" y="124.46" size="1.778" layer="95"/>
+</segment>
+<segment>
+<pinref part="U$1" gate="G$1" pin="VDD"/>
+<wire x1="243.84" y1="139.7" x2="246.38" y2="139.7" width="0.1524" layer="91"/>
+<label x="248.92" y="139.7" size="1.778" layer="95"/>
+<wire x1="246.38" y1="139.7" x2="248.92" y2="139.7" width="0.1524" layer="91"/>
+<junction x="246.38" y="139.7"/>
+<wire x1="246.38" y1="139.7" x2="246.38" y2="137.16" width="0.1524" layer="91"/>
+<pinref part="C8" gate="G$1" pin="1"/>
 </segment>
 </net>
 <net name="GND" class="0">
@@ -5975,14 +5703,19 @@ Source: &lt;a href="https://cdn.amphenol-cs.com/media/wysiwyg/files/drawing/f34g
 <junction x="228.6" y="116.84"/>
 </segment>
 <segment>
-<wire x1="210.82" y1="152.4" x2="210.82" y2="142.24" width="0.1524" layer="91"/>
+<wire x1="210.82" y1="152.4" x2="210.82" y2="144.78" width="0.1524" layer="91"/>
 <pinref part="SUPPLY5" gate="G$1" pin="GND"/>
 <pinref part="S1" gate="G$1" pin="1"/>
-<wire x1="210.82" y1="142.24" x2="210.82" y2="137.16" width="0.1524" layer="91"/>
+<wire x1="210.82" y1="144.78" x2="210.82" y2="137.16" width="0.1524" layer="91"/>
 <wire x1="218.44" y1="152.4" x2="210.82" y2="152.4" width="0.1524" layer="91"/>
-<pinref part="D1" gate="G$1" pin="C"/>
-<wire x1="213.36" y1="142.24" x2="210.82" y2="142.24" width="0.1524" layer="91"/>
-<junction x="210.82" y="142.24"/>
+<pinref part="U$1" gate="G$1" pin="VSS"/>
+<wire x1="218.44" y1="144.78" x2="210.82" y2="144.78" width="0.1524" layer="91"/>
+<junction x="210.82" y="144.78"/>
+</segment>
+<segment>
+<pinref part="C8" gate="G$1" pin="2"/>
+<wire x1="246.38" y1="129.54" x2="246.38" y2="127" width="0.1524" layer="91"/>
+<pinref part="SUPPLY25" gate="G$1" pin="GND"/>
 </segment>
 </net>
 <net name="D0" class="0">
@@ -6150,16 +5883,9 @@ Source: &lt;a href="https://cdn.amphenol-cs.com/media/wysiwyg/files/drawing/f34g
 <label x="93.98" y="35.56" size="1.778" layer="95" rot="R180"/>
 </segment>
 <segment>
-<pinref part="R7" gate="G$1" pin="1"/>
-<wire x1="233.68" y1="142.24" x2="238.76" y2="142.24" width="0.1524" layer="91"/>
-<label x="238.76" y="142.24" size="1.778" layer="95"/>
-</segment>
-</net>
-<net name="N$1" class="0">
-<segment>
-<pinref part="D1" gate="G$1" pin="A"/>
-<wire x1="220.98" y1="142.24" x2="223.52" y2="142.24" width="0.1524" layer="91"/>
-<pinref part="R7" gate="G$1" pin="2"/>
+<pinref part="U$1" gate="G$1" pin="DIN"/>
+<wire x1="243.84" y1="144.78" x2="248.92" y2="144.78" width="0.1524" layer="91"/>
+<label x="248.92" y="144.78" size="1.778" layer="95"/>
 </segment>
 </net>
 </nets>
